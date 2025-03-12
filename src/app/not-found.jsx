@@ -1,6 +1,6 @@
 
 export default function NotFound() {
-    const router = useRouter();
+   
     return (
       <div className="h-screen flex flex-col justify-center items-center">
         <img src="/images/404-page-not-found.png" />
