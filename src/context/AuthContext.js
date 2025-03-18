@@ -14,17 +14,33 @@ const AuthContextProvider = ({children}) => {
 
     const createUser = async (email, password) =>{
         try {
-
-          let userCredential =  await createUserWithEmailAndPassword( email, password)
+          let userCredential =  await createUserWithEmailAndPassword(auth, email, password)
           toastSuccessNotify("User created successfully")
-          console.log(userCredential);
-
         } catch (err) {
    toastErrorNotify(err.message)
         }
     }
 
-const values = {currentUser, createUser}
+    const signIn = async (email, password) =>{
+        try {
+          let userCredential =  await signInWithEmailAndPassword(auth, email, password)
+          toastSuccessNotify("User signed in successfully")
+        } catch (err) {
+   toastErrorNotify(err.message)
+        }
+    }
+
+    
+    const logOut = async () => {
+        try {
+          await signOut(auth);
+          toastSuccessNotify('Logged out successfully!');
+        } catch (error) {
+          toastErrorNotify('Logout failed: ' + error.message);
+        }
+      };
+
+const values = {currentUser, createUser, signIn, logOut}
   return (
     <AuthContext.Provider value={values} >
         {children}
