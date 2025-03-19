@@ -1,6 +1,7 @@
 "use client";
 import { toastErrorNotify, toastSuccessNotify } from '@/helpers/ToastNotify';
-import React, { createContext, useState } from 'react'
+import { createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signOut } from 'firebase/auth';
+import React, { createContext, useEffect, useState } from 'react'
 
 
 export const AuthContext = createContext();
@@ -10,7 +11,14 @@ export const useAuthContext = () => {
 }
 
 const AuthContextProvider = ({children}) => {
-    const [currentUser, setCurrentUser] = useState(false);
+    const [currentUser, setCurrentUser] = useState(() => {
+        return JSON.parse(sessionStorage.getItem("user")) || false;
+      });
+       
+
+      useEffect(() => {
+        userObserver();
+      }, []);
 
     const createUser = async (email, password) =>{
         try {
@@ -30,7 +38,6 @@ const AuthContextProvider = ({children}) => {
         }
     }
 
-    
     const logOut = async () => {
         try {
           await signOut(auth);
@@ -39,6 +46,19 @@ const AuthContextProvider = ({children}) => {
           toastErrorNotify('Logout failed: ' + error.message);
         }
       };
+
+      const userObserver = () =>{
+        onAuthStateChanged(auth, (currentUser) => {
+        if(currentUser){
+            const {email, displayname,photoURL} = currentUser;
+            setCurrentUser({email, displayname,photoURL});
+            sessionStorage.setItem('user', JSON.stringify({email, displayname,photoURL}));
+        } else{
+            setCurrentUser(false);
+            sessionStorage.removeItem('user');
+        }
+      })
+    }
 
 const values = {currentUser, createUser, signIn, logOut}
   return (
