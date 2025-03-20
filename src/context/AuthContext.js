@@ -2,7 +2,7 @@
 import { toastErrorNotify, toastSuccessNotify } from '@/helpers/ToastNotify';
 import { createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signOut } from 'firebase/auth';
 import React, { createContext, useEffect, useState } from 'react'
-
+import { auth } from '@/auth/firebase';
 
 export const AuthContext = createContext();
 
@@ -23,6 +23,9 @@ const AuthContextProvider = ({children}) => {
     const createUser = async (email, password) =>{
         try {
           let userCredential =  await createUserWithEmailAndPassword(auth, email, password)
+          await updateProfile(auth.currentUser, {
+            displayName: "Caner Yesiltas", photoURL: "https://pin.it/7F1sMWqUB"
+          })
           toastSuccessNotify("User created successfully")
         } catch (err) {
    toastErrorNotify(err.message)
