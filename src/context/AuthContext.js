@@ -1,14 +1,14 @@
 "use client";
 import { toastErrorNotify, toastSuccessNotify } from '@/helpers/ToastNotify';
-import { createUserWithEmailAndPassword, GoogleAuthProvider, onAuthStateChanged, signInWithEmailAndPassword, signOut } from 'firebase/auth';
-import React, { createContext, useEffect, useState } from 'react'
+import { createUserWithEmailAndPassword, GoogleAuthProvider, onAuthStateChanged, sendPasswordResetEmail, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from 'firebase/auth';
+import React, { createContext, useEffect, useState, useContext } from 'react'
 import { auth } from '@/auth/firebase';
 
 export const AuthContext = createContext();
 
 export const useAuthContext = () => {
     return useContext(AuthContext);
-}
+}//* with custom hook
 
 const AuthContextProvider = ({children}) => {
     const [currentUser, setCurrentUser] = useState(() => {
@@ -20,11 +20,12 @@ const AuthContextProvider = ({children}) => {
         userObserver();
       }, []);
 
-    const createUser = async (email, password) =>{
+    const createUser = async (email, password,displayName, photoURL) =>{
+      const user = userCredential.user;
         try {
           let userCredential =  await createUserWithEmailAndPassword(auth, email, password)
           await updateProfile(auth.currentUser, {
-            displayName: "Caner Yesiltas", photoURL: "https://pin.it/7F1sMWqUB"
+            displayName: displayName,  photoURL: "https://pin.it/7F1sMWqUB"
           })
           toastSuccessNotify("User created successfully")
         } catch (err) {
@@ -53,9 +54,9 @@ const AuthContextProvider = ({children}) => {
       const userObserver = () =>{
         onAuthStateChanged(auth, (currentUser) => {
         if(currentUser){
-            const {email, displayname,photoURL} = currentUser;
-            setCurrentUser({email, displayname,photoURL});
-            sessionStorage.setItem('user', JSON.stringify({email, displayname,photoURL}));
+            const {email, displayName, photoURL} = currentUser;
+            setCurrentUser({email, displayName,photoURL});
+            sessionStorage.setItem('user', JSON.stringify({email, displayName,photoURL}));
         } else{
             setCurrentUser(false);
             sessionStorage.removeItem('user');

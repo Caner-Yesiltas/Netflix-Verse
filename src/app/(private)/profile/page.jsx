@@ -5,7 +5,7 @@ export const metadata= {
 const Profile = () => {
   return (
     <div>
-      
+      Profile Page
     </div>
   )
 }
