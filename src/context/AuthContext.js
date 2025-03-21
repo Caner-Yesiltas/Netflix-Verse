@@ -1,6 +1,6 @@
 "use client";
 import { toastErrorNotify, toastSuccessNotify } from '@/helpers/ToastNotify';
-import { createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signOut } from 'firebase/auth';
+import { createUserWithEmailAndPassword, GoogleAuthProvider, onAuthStateChanged, signInWithEmailAndPassword, signOut } from 'firebase/auth';
 import React, { createContext, useEffect, useState } from 'react'
 import { auth } from '@/auth/firebase';
 
@@ -63,7 +63,28 @@ const AuthContextProvider = ({children}) => {
       })
     }
 
-const values = {currentUser, createUser, signIn, logOut}
+    const googleProvider = () =>{
+        const provider = new GoogleAuthProvider();
+        signInWithPopup(auth, provider)
+  .then((result) => {
+   toastSuccessNotify("User signed in successfully")
+  }).catch((error) => {
+    toastErrorNotify(error.message)
+  });
+    }
+
+    const forgotPassword = (email) =>{
+        sendPasswordResetEmail(auth, email)
+  .then(() => {
+    toastSuccessNotify("Password reset email sent")
+  })
+  .catch((error) => {
+  toastErrorNotify(error.message)
+  });
+    }
+
+
+const values = {currentUser, createUser, signIn, logOut, googleProvider, forgotPassword}
   return (
     <AuthContext.Provider value={values} >
         {children}
