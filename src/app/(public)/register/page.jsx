@@ -10,6 +10,7 @@ const Register = () => {
     lastName: "",
     email: "",
     password: "",
+    photoURL: "",
   });
 
   const { createUser } = useAuthContext();
@@ -25,7 +26,7 @@ const Register = () => {
     const displayName = `${firstName} ${lastName}`;
     e.preventDefault();
     console.log(info);
-    createUser(email, password, displayName);
+    createUser(email, password, displayName, photoURL);
   }
 
   return (
@@ -80,6 +81,16 @@ const Register = () => {
                   onChange={handleChange}
                 />
                 <label htmlFor="floating_password">Password</label>
+              </div>
+              <div className="relative z-0 w-full mb-6 group">
+                <input
+                  name="photoURL"
+                  className="peer"
+                  type="text"
+                  placeholder=" "
+                  onChange={handleChange}
+                />
+                <label htmlFor="floating_photoURL">Profile Picture URL (optional)</label>
               </div>
               <button className="btn-danger" type="submit">
                 Register

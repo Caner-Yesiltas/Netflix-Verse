@@ -35,13 +35,14 @@ const AuthContextProvider = ({ children }) => {
         email,
         password,
       );
+      const user = userCredential.user;
       await updateProfile(auth.currentUser, {
         displayName: displayName,
-        photoURL: 'https://pin.it/7F1sMWqUB',
+        photoURL: photoURL,
       });
       toastSuccessNotify('User created successfully');
       router.push('/profile');
-      const user = userCredential.user;
+     
     } catch (err) {
       toastErrorNotify(err.message);
     }
