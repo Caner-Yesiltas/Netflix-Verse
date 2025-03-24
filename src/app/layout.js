@@ -1,6 +1,8 @@
 import Navbar from "@/components/Navbar"
 import "./globals.css";
 import AuthContextProvider from "@/context/AuthContext";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export const metadata = {
   title: "Netflix-Verse",
@@ -14,6 +16,7 @@ export default function RootLayout({ children }) {
         <AuthContextProvider>
         <Navbar/>
         {children}
+        <ToastContainer/>
         </AuthContextProvider>
         </body>
     </html>
