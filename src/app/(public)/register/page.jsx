@@ -1,8 +1,8 @@
 "use client";
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import GoogleIcon from '../../../../public/icons/GoogleIcon';
 import { useAuthContext } from '@/context/AuthContext';
-
+import { useRouter } from 'next/navigation';
 
 const Register = () => {
   const [info, setInfo] = useState({
@@ -12,9 +12,15 @@ const Register = () => {
     password: "",
     photoURL: "",
   });
+  
+  const router = useRouter();
+  const { createUser, currentUser } = useAuthContext();
 
-  const { createUser } = useAuthContext();
-
+  useEffect(() => {
+    if (currentUser) {
+      router.push("/profile"); 
+    }
+  }, [currentUser, router]);
 
   const handleChange = (e) => {
     setInfo({...info, [e.target.name]:e.target.value})

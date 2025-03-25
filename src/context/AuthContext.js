@@ -41,7 +41,7 @@ const AuthContextProvider = ({ children }) => {
         photoURL: photoURL,
       });
       toastSuccessNotify('User created successfully');
-      router.push('/profile');
+
      
     } catch (err) {
       toastErrorNotify(err.message);
