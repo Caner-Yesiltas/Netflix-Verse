@@ -29,18 +29,29 @@ const AuthContextProvider = ({ children }) => {
   }, []);
 
   const createUser = async (email, password, displayName, photoURL) => {
+    
     try {
       let userCredential = await createUserWithEmailAndPassword(
         auth,
         email,
         password,
       );
+
       const user = userCredential.user;
       const profilePhotoURL = photoURL || "https://img.freepik.com/premium-psd/man-with-sunglasses-sunset-background_1073400-442.jpg?w=740";
       await updateProfile(auth.currentUser, {
         displayName: displayName,
         photoURL: profilePhotoURL,
       });
+
+      await user.reload();
+      const updatedUser = auth.currentUser;
+    setCurrentUser({
+      email: updatedUser.email,
+      displayName: updatedUser.displayName,
+      photoURL: updatedUser.photoURL,
+    });
+
       toastSuccessNotify('User created successfully');
 
      
