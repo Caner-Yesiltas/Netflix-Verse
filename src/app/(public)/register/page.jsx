@@ -26,7 +26,7 @@ const Register = () => {
     setInfo({...info, [e.target.name]:e.target.value})
   }
 
-  const { firstName, lastName, email, password } = info;
+  const { firstName, lastName, email, password, photoURL } = info;
 
  const handleSubmit = (e) => {
     const displayName = `${firstName} ${lastName}`;

@@ -36,9 +36,10 @@ const AuthContextProvider = ({ children }) => {
         password,
       );
       const user = userCredential.user;
+      const profilePhotoURL = photoURL || "https://img.freepik.com/premium-psd/man-with-sunglasses-sunset-background_1073400-442.jpg?w=740";
       await updateProfile(auth.currentUser, {
         displayName: displayName,
-        photoURL: photoURL,
+        photoURL: profilePhotoURL,
       });
       toastSuccessNotify('User created successfully');
 

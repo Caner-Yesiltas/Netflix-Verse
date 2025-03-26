@@ -4,10 +4,14 @@ import { useState, useEffect } from "react";
 import { Fragment } from "react";
 import { Disclosure, Menu, MenuButton, MenuItem, MenuItems,Transition  } from '@headlessui/react'
 import Link from 'next/link'
+import { useAuthContext } from '@/context/AuthContext';
 
 
 const Navbar = () => {
   const [showBackground, setShowBackground] = useState(false);
+
+  const { currentUser } = useAuthContext();
+  const {logOut} = useAuthContext();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -25,7 +29,7 @@ const Navbar = () => {
     };
   }, []);
   
-  const currentUser = { displayName: "Caner Yesiltas" };
+  
   return (
     <>
     <Disclosure as="nav" className="text-white fixed top-0 z-20 w-full">
@@ -95,7 +99,7 @@ const Navbar = () => {
                   <MenuItem>
                     <span
                       className="block px-4 py-2 text-sm text-gray-700 data-[focus]:bg-gray-100 cursor-pointer"
-                    
+                    onClick={logOut}
                     >
                       Logout
                     </span>
