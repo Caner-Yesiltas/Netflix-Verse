@@ -14,7 +14,7 @@ const Register = () => {
   });
   
   const router = useRouter();
-  const { createUser, currentUser } = useAuthContext();
+  const { createUser, currentUser, googleProvider } = useAuthContext();
 
   useEffect(() => {
     if (currentUser) {
@@ -104,6 +104,7 @@ const Register = () => {
               <button
                 className="flex justify-between text-center items-center btn-danger"
                 type="button"
+                onClick={googleProvider}
               >
                 Continue with Google
                 <GoogleIcon color="currentColor" />
