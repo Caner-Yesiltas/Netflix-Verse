@@ -104,7 +104,7 @@ const AuthContextProvider = ({ children }) => {
     signInWithPopup(auth, provider)
       .then((result) => {
         toastSuccessNotify('User signed in successfully');
-        Router.push("/profile"); 
+        router.push("/profile"); 
       })
       .catch((error) => {
         toastErrorNotify(error.message);
