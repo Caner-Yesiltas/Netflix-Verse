@@ -8,6 +8,11 @@ export const metadata = {
 const Movies = async () => {
   const movies = await getMovies("now_playing")
   console.log(movies);
+  
+  if (!movies || movies.length === 0) {
+    // Handle the case when movies is empty or undefined
+    return <div>No movies found.</div>;
+  }
   return (
     <div>
       <HeroSection
