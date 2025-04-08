@@ -1,12 +1,15 @@
+"use client";
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 
 const IMG_API = 'https://image.tmdb.org/t/p/w1280';
 const defaultImage =
   'https://images.unsplash.com/photo-1581905764498-f1b60bae941a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=700&q=80';
 
 const MovieCard = ({ vote_average, poster_path, id }) => {
+  const router = useRouter();
   return (
-    <div className='w-40 h-[240px] relative cursor-pointer'>
+    <div className='w-40 h-[240px] relative cursor-pointer' onClick={()=> router.push("/movies" + id)}   >
       <Image
         src={poster_path ? IMG_API + poster_path : defaultImage}
         width={160}
