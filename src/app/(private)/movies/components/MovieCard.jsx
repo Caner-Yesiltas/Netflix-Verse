@@ -9,7 +9,8 @@ const defaultImage =
 const MovieCard = ({ vote_average, poster_path, id }) => {
   const router = useRouter();
   return (
-    <div className='w-40 h-[240px] relative cursor-pointer' onClick={()=> router.push("/movies" + id)}   >
+    <div className='w-40 h-[240px] relative cursor-pointer' onClick={() => router.push("/movies/" + id)}
+    >
       <Image
         src={poster_path ? IMG_API + poster_path : defaultImage}
         width={160}
