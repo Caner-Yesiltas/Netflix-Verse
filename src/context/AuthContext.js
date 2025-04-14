@@ -1,5 +1,5 @@
 'use client';
-import { toastErrorNotify, toastSuccessNotify } from '@/helpers/ToastNotify';
+import { toastErrorNotify, toastSuccessNotify, toastWarnNotify } from '@/helpers/ToastNotify';
 import {
   createUserWithEmailAndPassword,
   GoogleAuthProvider,
@@ -75,9 +75,15 @@ const AuthContextProvider = ({ children }) => {
   };
 
   const logOut = async () => {
+    if (!currentUser) {
+      toastWarnNotify('You are already logged out!');
+      return;
+    }
     try {
       await signOut(auth);
-      toastSuccessNotify('Logged out successfully!');
+      toastSuccessNotify('Logged out successfully');
+      router.push('/login');
+    
     } catch (error) {
       toastErrorNotify('Logout failed: ' + error.message);
     }
