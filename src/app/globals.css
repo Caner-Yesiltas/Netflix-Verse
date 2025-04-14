@@ -6,7 +6,7 @@ html {
   @apply h-full;
 }
 body {
-  @apply bg-zinc-900 min-h-full;
+  @apply bg-slate-900 min-h-full;
 }
 
 
