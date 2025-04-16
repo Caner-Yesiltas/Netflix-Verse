@@ -1,16 +1,30 @@
-import React from 'react'
+'use client';
+
+import React from 'react';
+
+import { Triangle } from 'react-loader-spinner';
 
 const loading = () => {
   return (
-    <div className="text-center">
-      <div
-        className="spinner-border animate-spin inline-block w-8 h-8 border-4 rounded-full text-blue-600 mt-52"
-        role="status"
-      >
-        <span className="visually-hidden">Loading...</span>
-      </div>
+    <div
+      style={{
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        minHeight: '100vh',
+      }}
+    >
+      <Triangle
+        visible={true}
+        height='80'
+        width='80'
+        color='#E62A11' // İstediğiniz rengi buraya yazın
+        ariaLabel='triangle-loading'
+        wrapperStyle={{}}
+        wrapperClass=''
+      />
     </div>
-  )
-}
+  );
+};
 
-export default loading
+export default loading;

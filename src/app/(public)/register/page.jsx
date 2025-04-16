@@ -19,6 +19,7 @@ const Register = () => {
   useEffect(() => {
     if (currentUser) {
       router.push("/profile"); 
+      
     }
   }, [currentUser, router]);
 

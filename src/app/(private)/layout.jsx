@@ -5,6 +5,7 @@ import React, { useEffect } from 'react';
 
 const PrivateLayout = ({ children }) => {
   const { currentUser } = useAuthContext;
+  
 
   const router = useRouter();
   useEffect(() => {

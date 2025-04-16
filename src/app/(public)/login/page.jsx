@@ -1,8 +1,9 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import GoogleIcon from "/public/icons/GoogleIcon";
 import { useAuthContext } from "@/context/AuthContext";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 const Login = () => {
   const [info, setInfo] = useState({
@@ -10,8 +11,14 @@ const Login = () => {
     password: "",
   });
 
-  const { signIn, googleProvider } = useAuthContext();
-
+  const { signIn, googleProvider,currentUser } = useAuthContext();
+  const router = useRouter(); 
+  
+  useEffect(() => {
+    if (currentUser) {
+      router.push("/profile");
+    }
+  }, [currentUser, router]);
   const handleChange = (e) =>
     setInfo({ ...info, [e.target.name]: e.target.value });
 
@@ -22,6 +29,7 @@ const Login = () => {
     signIn(email, password);
   };
 
+  
   return (
     <div className="relative h-screen w-full bg-[url('/images/hero.jpg')] bg-no-repeat bg-center bg-fixed bg-cover">
       <div className="bg-black w-full h-full lg:bg-opacity-50">
