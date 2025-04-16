@@ -118,6 +118,10 @@ const AuthContextProvider = ({ children }) => {
   };
 
   const forgotPassword = (email) => {
+    if (!email) {
+      toastWarnNotify('Please enter your email address');
+      return;
+    }
     sendPasswordResetEmail(auth, email)
       .then(() => {
         toastSuccessNotify('Password reset email sent');
