@@ -62,7 +62,7 @@ const Login = () => {
                 <label htmlFor="floating_password">Password</label>
               </div>
               <div className="flex justify-between">
-                <span className="py-3 font-[0.75em] cursor-pointer text-gray-500 hover:text-red-main ">
+                <span className="py-3 font-[0.75em] cursor-pointer text-gray-500 hover:text-red-main " onClick={()=> forgetpassword()}>
                   Forgot Password
                 </span>
                 <Link
