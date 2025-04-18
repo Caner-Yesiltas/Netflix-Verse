@@ -2,16 +2,16 @@
   <h1>🎬 Netflix Verse</h1> 
   
   <h3>
-    👉 <a href="[PLACEHOLDER_PROJECT_LINK]">Live Demo</a> 👈 
+    👉 <a href="https://netflix-verse-eight.vercel.app/">Live Demo</a> 👈 
   </h3>
 </div>
 
 <div align="center">
- 
-  <p><em>(Project demo GIF or screenshot will be added here)</em></p> 
+  <img src="/public/Netflix-Verse.gif" alt="Netflix Verse" width="800"/>
 </div>
 
-## 🚀 About The Project
+
+## ♾️ About The Project
 
 Netflix Verse is a clone project that recreates the interface and core functionalities of the popular streaming platform Netflix using modern web technologies. It allows users to watch movie and TV show trailers, browse content by category, register/login, and experience the platform's general user interface. This project was developed primarily using Next.js, Firebase Authentication, and the TMDB API, aiming to showcase modern frontend development skills.
 
@@ -88,11 +88,14 @@ npm install
 npm run dev
 # or
 # yarn dev
-Use code with caution.
-Markdown
+
 Note: You need to obtain Firebase and TMDB API keys for free from their respective platforms.
-📁 Project Structure
+
+
+## 📁 Project Structure
+
 The project follows the Next.js App Router structure:
+
 netflix-verse/
 ├── src/
 │   ├── app/                  # Next.js App Router main directory
@@ -100,7 +103,18 @@ netflix-verse/
 │   │   │   ├── movies/       # Movie listing and detail pages
 │   │   │   │   ├── [movieId]/
 │   │   │   │   │   └── page.jsx  # Movie Detail Page
+│   │   │   │   ├── components/   # Components specific to /movies route
+│   │   │   │   │   ├── HeroSection.jsx
+│   │   │   │   │   ├── MovieCard.jsx
+│   │   │   │   │   ├── MovieSection.jsx
+│   │   │   │   │   └── VideoSection.jsx
 │   │   │   │   └── page.jsx    # Main Movie Listing Page
+│   │   │   ├── profile/      # User profile/selection page
+│   │   │   │   ├── components/   # Components specific to /profile route
+│   │   │   │   │   ├── CardContainer.jsx
+│   │   │   │   │   └── UserCard.jsx
+│   │   │   │   ├── layout.jsx    # Layout for the profile page (if needed)
+│   │   │   │   └── page.jsx      # Profile Page itself
 │   │   │   └── layout.jsx    # Private area layout (Auth check)
 │   │   ├── (public)/         # Group for publicly accessible pages
 │   │   │   ├── login/
@@ -110,18 +124,14 @@ netflix-verse/
 │   │   ├── error.jsx         # UI for error states
 │   │   ├── favicon.ico       # Favicon
 │   │   ├── globals.css       # Global styles (including Tailwind)
-│   │   ├── layout.jsx        # Root layout
+│   │   ├── layout.jsx        # Root (Root) layout
 │   │   ├── loading.jsx       # UI for loading state
 │   │   ├── not-found.jsx     # UI for 404 Page
 │   │   └── page.jsx          # Main Landing Page (Home)
 │   ├── auth/                 # Firebase configuration
 │   │   └── firebase.js
-│   ├── components/           # Reusable UI components
-│   │   ├── HeroSection.jsx
-│   │   ├── MovieCard.jsx
-│   │   ├── MovieSection.jsx
-│   │   ├── Navbar.jsx
-│   │   └── VideoSection.jsx
+│   ├── components/           # Globally reusable UI components (if any, e.g., Navbar)
+│   │   └── Navbar.jsx        # (Assuming Navbar is reusable)
 │   ├── context/              # React Context API
 │   │   └── AuthContext.js
 │   └── helpers/              # Helper functions
@@ -137,29 +147,39 @@ netflix-verse/
 ├── postcss.config.mjs        # PostCSS configuration (for Tailwind)
 ├── README.md                 # Project description (This file)
 └── tailwind.config.js        # Tailwind CSS configuration
-Use code with caution.
-🎯 Core Features Details
-Authentication Flow
-Users can easily register and log in using their email/password or Google accounts.
-Unauthenticated users can only access the home, login, and register pages. They are redirected to the login page if they try to access protected routes like /movies (PrivateLayout).
-The user's session status is managed globally using AuthContext and dynamically displayed in components like the Navbar (User name, profile picture, Login/Logout buttons).
-A password reset function via email is available for users who forget their passwords.
-Content Presentation & Interaction
-The main movie page (/movies) displays movies from different categories fetched from the TMDB API within horizontally scrollable MovieSection components.
-The HeroSection typically showcases the first movie from the "Now Playing" category with a large background video/image and information.
-MovieCard components display movie posters and ratings, redirecting to the respective movie's detail page (/movies/[movieId]) upon clicking.
-On the movie detail page, the VideoSection component plays the movie trailer using a YouTube video key obtained via the getVideoKey function.
-Technical Architecture & Optimization
-A balanced use of Next.js's Server Components and Client Components ("use client") is employed. Operations like API requests are generally handled in Server Components, while components requiring user interaction (forms, context usage, etc.) are marked as Client Components.
-fetch is used for API requests within movieFunctions.js, and Next.js's revalidate option enables Incremental Static Regeneration (ISR) by revalidating data at specified intervals (e.g., 86400 seconds - 24 hours for video keys and movie details).
-loading.jsx and error.jsx files provide automatic loading and error UIs for corresponding route segments, following Next.js's file-based conventions.
-📝 License
-This project is licensed under the MIT License - see the LICENSE file for details. <!-- You can add a LICENSE file to your repo (e.g., with MIT License text) -->
-📫 Contact
-Caner Yesiltas - caneryesiltas1@gmail.com
-Project Repository: https://github.com/Caner-Yesiltas/Netflix-Verse 
-Project Link: []()
-<div align="center">
-Made with 🎬 by Caner Yesiltas
-</div>
+
 ```
+## 🎯 Core Features Details
+
+### Authentication Flow
+- **Sign Up/Sign In:** Users can easily register and log in using their email/password or Google accounts.
+- **Protected Routes:** Unauthenticated users can only access public pages (home, login, register). They are automatically redirected to the login page if they attempt to access protected routes like `/movies` (Handled by `PrivateLayout`).
+- **Session Management:** The user's session status is managed globally using `AuthContext` and dynamically reflected in UI components like the Navbar (displaying user name, profile picture, and appropriate Login/Logout buttons).
+- **Password Reset:** A password reset function via email is available for users who forget their passwords.
+
+### Content Presentation & Interaction
+- **Categorized Browsing:** The main movie page (`/movies`) displays movies fetched from the TMDB API, organized into different categories (Now Playing, Popular, Top Rated, Upcoming) within horizontally scrollable `MovieSection` components.
+- **Hero Section:** Features a prominent movie (typically the first from the "Now Playing" list) with a large background video/image and essential information.
+- **Movie Cards:** `MovieCard` components display movie posters and ratings, redirecting to the respective movie's detail page (`/movies/[movieId]`) upon clicking.
+- **Trailer Playback:** On the movie detail page, the `VideoSection` component embeds and plays the movie trailer using a YouTube video key obtained via the `getVideoKey` helper function.
+
+### Technical Architecture & Optimization
+- **Next.js App Router:** Employs a balanced use of Next.js's Server Components (for data fetching, server-side logic) and Client Components (`"use client"` for interactivity, state hooks, context usage).
+- **API Data Fetching:** Uses the `fetch` API within server-side helper functions (`movieFunctions.js`) to retrieve data from the TMDB API.
+- **Incremental Static Regeneration (ISR):** Leverages Next.js's `revalidate` option in `fetch` calls to periodically update cached data (like movie details and video keys) at specified intervals (e.g., every 24 hours), ensuring data freshness without needing a rebuild for every request.
+- **Convention-Based UI States:** Utilizes Next.js's file-based conventions by implementing `loading.jsx` and `error.jsx` files to automatically provide loading and error UIs for the corresponding route segments.
+
+## 📝 License
+
+This project is licensed under the MIT License - see the `LICENSE` file for details. 
+
+## 📫 Contact
+
+Caner Yesiltas - [caneryesiltas1@gmail.com](mailto:caneryesiltas1@gmail.com)
+
+Project Repository: [https://github.com/Caner-Yesiltas/Netflix-Verse](https://github.com/Caner-Yesiltas/Netflix-Verse) 
+Live Demo: [https://netflix-verse-eight.vercel.app/](https://netflix-verse-eight.vercel.app/) 
+
+<div align="center">
+  Made with 🎬 by Caner Yesiltas
+</div>
