@@ -177,8 +177,8 @@ This project is licensed under the MIT License - see the `LICENSE` file for deta
 
 Caner Yesiltas - [caneryesiltas1@gmail.com](mailto:caneryesiltas1@gmail.com)
 
-Project Repository: [https://github.com/Caner-Yesiltas/Netflix-Verse](https://github.com/Caner-Yesiltas/Netflix-Verse) 
-Live Demo: [https://netflix-verse-eight.vercel.app/](https://netflix-verse-eight.vercel.app/) 
+- **Project Repository:** [https://github.com/Caner-Yesiltas/Netflix-Verse](https://github.com/Caner-Yesiltas/Netflix-Verse) 
+- **Live Demo:** [https://netflix-verse-eight.vercel.app/](https://netflix-verse-eight.vercel.app/)
 
 <div align="center">
   Made with 🎬 by Caner Yesiltas
