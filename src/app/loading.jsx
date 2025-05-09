@@ -18,7 +18,7 @@ const loading = () => {
         visible={true}
         height='80'
         width='80'
-        color='#E62A11' // İstediğiniz rengi buraya yazın
+        color='#E62A11' 
         ariaLabel='triangle-loading'
         wrapperStyle={{}}
         wrapperClass=''

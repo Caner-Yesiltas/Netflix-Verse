@@ -15,8 +15,8 @@ const Movies = async () => {
     return <div>No movies found.</div>;
   }
   return (
-    <div>
-      <HeroSection
+    <div className='pt-20'>
+      <HeroSection className= "mt-50 mb-5"
       title ={movies[0].title}
       overview={movies[0]?.overview}
       id={movies[0]?.id}
