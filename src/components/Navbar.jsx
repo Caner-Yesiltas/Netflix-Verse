@@ -10,7 +10,7 @@ const Navbar = () => {
   const [showBackground, setShowBackground] = useState(false);
   const { currentUser, logOut } = useAuthContext();
   const [searchTerm, setSearchTerm] = useState("");
-  const [debouncedSearchTerm] = useDebounce(searchTerm, 500);
+  const [debouncedSearchTerm] = useDebounce(searchTerm, 1500);
   const router = useRouter();
 
   useEffect(() => {
@@ -26,9 +26,7 @@ const Navbar = () => {
   useEffect(() => {
     if (debouncedSearchTerm && currentUser) {
       router.push(`/search/${debouncedSearchTerm}`);
-    } else if (router.pathname === "/search" && !debouncedSearchTerm && currentUser) {
-      router.push("/movies");
-    }
+    } 
   }, [debouncedSearchTerm, router, currentUser]);
 
   return (
