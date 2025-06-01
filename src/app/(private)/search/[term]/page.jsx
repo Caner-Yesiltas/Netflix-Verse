@@ -24,6 +24,7 @@ export default function SearchPage() {
         const data = await res.json();
         setMovies(data.results || []);
       } catch (err) {
+         console.error("API failed:", err);
         setMovies([]);
       } finally {
         setLoading(false);

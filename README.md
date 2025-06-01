@@ -41,6 +41,12 @@ Netflix Verse is a clone project that recreates the interface and core functiona
     - Data fetching from the TMDB API.
     - Global state management for authentication status using React Context API.
     - Fast and efficient styling with Tailwind CSS.
+- 🔍 **Search Functionality:**
+    - Real-time movie search with debounced input (1.5 second delay)
+    - Dynamic routing to search results page (`/search/[term]`)
+    - Search results display with movie posters and titles
+    - URL-based search terms for shareable links
+    - Search input only available for authenticated users
 
 ### 🛠️ Built With
 
@@ -55,6 +61,7 @@ Netflix Verse is a clone project that recreates the interface and core functiona
 - **Icons:** [Heroicons](https://heroicons.com/)
 - **Notifications:** [React Toastify](https://fkhadra.github.io/react-toastify/)
 - **Loading Indicator:** [React Loader Spinner](https://mhnpd.github.io/react-loader-spinner/)
+- **Search Optimization:** [use-debounce](https://github.com/xnimorz/use-debounce) (for debounced search input)
 
 ## 💻 Getting Started
 
@@ -115,6 +122,9 @@ netflix-verse/
 │   │   │   │   │   └── UserCard.jsx
 │   │   │   │   ├── layout.jsx    # Layout for the profile page (if needed)
 │   │   │   │   └── page.jsx      # Profile Page itself
+│   │   │   ├── search/       # Search functionality
+│   │   │   │   └── [term]/   # Dynamic search results page
+│   │   │   │       └── page.jsx  # Search Results Page
 │   │   │   └── layout.jsx    # Private area layout (Auth check)
 │   │   ├── (public)/         # Group for publicly accessible pages
 │   │   │   ├── login/
@@ -130,8 +140,8 @@ netflix-verse/
 │   │   └── page.jsx          # Main Landing Page (Home)
 │   ├── auth/                 # Firebase configuration
 │   │   └── firebase.js
-│   ├── components/           # Globally reusable UI components (if any, e.g., Navbar)
-│   │   └── Navbar.jsx        # (Assuming Navbar is reusable)
+│   ├── components/           # Globally reusable UI components
+│   │   └── Navbar.jsx        # Navigation component with search functionality
 │   ├── context/              # React Context API
 │   │   └── AuthContext.js
 │   └── helpers/              # Helper functions
