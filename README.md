@@ -1,5 +1,5 @@
 <div align="center">
-  <h1>🎬 Netflix Verse</h1> 
+  <h1>🎬 Netflix Verse  (Streaming Platform Clone)</h1> 
   
   <h3>
     👉 <a href="https://netflix-verse-eight.vercel.app/">Live Demo</a> 👈 
